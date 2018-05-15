@@ -30,7 +30,6 @@ namespace ServerBTS2.Models
         {
             return new ApplicationDbContext();
         }
-        public DbSet<BaoCao> BaoCaos { get; set; }
         public DbSet<HinhAnhTram> HinhAnhTrams { get; set; }
         public DbSet<LichSuQuanLy> LichSuQuanLies { get; set; }
         public DbSet<MatDien> MatDiens { get; set; }
@@ -39,7 +38,5 @@ namespace ServerBTS2.Models
         public DbSet<NhaTram> NhaTrams { get; set; }
         public DbSet<Tram> Trams { get; set; }
         public DbSet<UserBTS> UserBTSs { get; set; }
-        public DbSet<TheLoaiAnh> TheLoaiAnhs { get; set; }
-        public DbSet<HinhAnh> HinhAnhs { get; set; }
     }
 }

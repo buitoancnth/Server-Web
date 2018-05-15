@@ -250,8 +250,6 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\BaoCaosController.cs" />
-    <Compile Include="Controllers\HinhAnhsController.cs" />
     <Compile Include="Controllers\HinhAnhTramsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LichSuQuanLiesController.cs" />
@@ -259,29 +257,18 @@
     <Compile Include="Controllers\NhaMangsController.cs" />
     <Compile Include="Controllers\NhatKiesController.cs" />
     <Compile Include="Controllers\NhaTramsController.cs" />
-    <Compile Include="Controllers\TheLoaiAnhsController.cs" />
     <Compile Include="Controllers\TramsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201805040203419_InitialCreate.cs" />
-    <Compile Include="Migrations\201805040203419_InitialCreate.Designer.cs">
-      <DependentUpon>201805040203419_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805091441039_Initial.cs" />
-    <Compile Include="Migrations\201805091441039_Initial.Designer.cs">
-      <DependentUpon>201805091441039_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805110303542_Initial1.cs" />
-    <Compile Include="Migrations\201805110303542_Initial1.Designer.cs">
-      <DependentUpon>201805110303542_Initial1.cs</DependentUpon>
+    <Compile Include="Migrations\201805150306425_Initial.cs" />
+    <Compile Include="Migrations\201805150306425_Initial.Designer.cs">
+      <DependentUpon>201805150306425_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\BaoCao.cs" />
-    <Compile Include="Models\HinhAnh.cs" />
     <Compile Include="Models\HinhAnhTram.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LichSuQuanLy.cs" />
@@ -289,7 +276,6 @@
     <Compile Include="Models\NhaMang.cs" />
     <Compile Include="Models\NhatKy.cs" />
     <Compile Include="Models\NhaTram.cs" />
-    <Compile Include="Models\TheLoaiAnh.cs" />
     <Compile Include="Models\Tram.cs" />
     <Compile Include="Models\UserBTS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -366,7 +352,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Image\" />
-    <Folder Include="Userimage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -380,14 +365,8 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201805040203419_InitialCreate.resx">
-      <DependentUpon>201805040203419_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805091441039_Initial.resx">
-      <DependentUpon>201805091441039_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805110303542_Initial1.resx">
-      <DependentUpon>201805110303542_Initial1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805150306425_Initial.resx">
+      <DependentUpon>201805150306425_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -408,7 +387,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>57219</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:57219/</IISUrl>
+          <IISUrl>http://localhost:57220/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

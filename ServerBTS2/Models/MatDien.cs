@@ -20,14 +20,12 @@ namespace ServerBTS2.Models
         [DisplayFormat(DataFormatString = "{0:HH:mm}", ApplyFormatInEditMode = true)]
         public TimeSpan GioMatDien { get; set; }
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:HH:mm}", ApplyFormatInEditMode = true)]
-        public TimeSpan ThoiGianMayNo { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = true)]
+        public DateTime ThoiGianMayNo { get; set; }
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:HH:mm}", ApplyFormatInEditMode = true)]
-        public TimeSpan ThoiGianNgung { get; set; }
-        [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:HH:mm}", ApplyFormatInEditMode = true)]
-        public TimeSpan? TongThoiGianChay { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = true)]
+        public DateTime ThoiGianNgung { get; set; }
+        public String TongThoiGianChay { get; set; }
         [Range(0, 1000, ErrorMessage = "QuangDuongDiChuyen should be bigger than 0.")]
         public double QuangDuongDiChuyen { get; set; }
         public double? TienPhat { get; set; }

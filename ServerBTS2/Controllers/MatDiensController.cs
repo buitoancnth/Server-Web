@@ -41,12 +41,18 @@ namespace ServerBTS2.Controllers
         [Route("api/MatDienByIDTram")]
         public IHttpActionResult GetMatDienByIDTram(int id)
         {
-            var matdien = db.MatDiens.Where(u => u.IDTram == id).ToList();
-            return Ok(matdien);
+            var tmpTram = db.Trams.SingleOrDefault(u => u.IDTram == id);
+            if (tmpTram == null)
+            {
+                return NotFound();
+            }
+            if (!isAccess(tmpTram.IDQuanLy))
+                return StatusCode(HttpStatusCode.Unauthorized);
+            var listMatDien = db.MatDiens.Where(u => u.IDTram == id);
+            return Ok(listMatDien);
         }
 
         // GET: api/MatDiens/3
-        [Authorize(Roles = "QuanLy")]
         [ResponseType(typeof(MatDien))]
         public IHttpActionResult GetMatDien(int id)
         {
@@ -63,6 +69,7 @@ namespace ServerBTS2.Controllers
         }
 
         // POST: api/MatDiens
+        [Authorize(Roles = "QuanLy")]
         [ResponseType(typeof(MatDien))]
         public IHttpActionResult PostMatDien(MatDien matDien)
         {
@@ -78,18 +85,16 @@ namespace ServerBTS2.Controllers
             if (!isAccess(tmpTram.IDQuanLy)) return StatusCode(HttpStatusCode.NotFound);
 
             DateTime UTCNow = DateTime.UtcNow.AddHours(7);
-            if (matDien.NgayMatDien.Subtract(UTCNow).TotalDays > 0) return BadRequest();
-            else if (matDien.NgayMatDien.Subtract(UTCNow).TotalDays == 0)
-            {
-                if (matDien.GioMatDien.Subtract(matDien.ThoiGianMayNo).TotalMinutes > 0) return BadRequest();
-                if (matDien.ThoiGianMayNo.Subtract(matDien.ThoiGianNgung).TotalMinutes > 0) return BadRequest();
-                if (matDien.ThoiGianNgung.Subtract(UTCNow.TimeOfDay).TotalMinutes > 0) return BadRequest();
-            }
+            DateTime thoiGianMatDien = matDien.NgayMatDien.AddHours(matDien.GioMatDien.Hours)
+                .AddMinutes(matDien.GioMatDien.Minutes);
+            if (thoiGianMatDien.Subtract(matDien.ThoiGianMayNo).TotalMinutes > 0) return BadRequest();
+            if (matDien.ThoiGianMayNo.Subtract(matDien.ThoiGianNgung).TotalMinutes > 0) return BadRequest();
+            if (matDien.ThoiGianNgung.Subtract(UTCNow).TotalMinutes > 0) return BadRequest();
 
+            matDien.TongThoiGianChay = matDien.ThoiGianNgung.Subtract(matDien.ThoiGianMayNo).ToString();
 
-            matDien.TongThoiGianChay = matDien.ThoiGianNgung.Subtract(matDien.ThoiGianMayNo);
+            TimeSpan thoiGianTre = matDien.ThoiGianMayNo.Subtract(thoiGianMatDien);
 
-            TimeSpan thoiGianTre = matDien.ThoiGianMayNo.Subtract(matDien.GioMatDien);
 
             TimeSpan thoiGianChamUngCuu;
             if (matDien.QuangDuongDiChuyen <= 20)

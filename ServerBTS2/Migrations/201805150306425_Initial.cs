@@ -3,39 +3,17 @@ namespace ServerBTS2.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
-            CreateTable(
-                "dbo.BaoCaos",
-                c => new
-                    {
-                        IDBaoCao = c.Int(nullable: false, identity: true),
-                        IDQuanLy = c.String(),
-                        ThoiGian = c.DateTime(nullable: false),
-                        VanDe = c.String(nullable: false),
-                    })
-                .PrimaryKey(t => t.IDBaoCao);
-            
-            CreateTable(
-                "dbo.HinhAnhs",
-                c => new
-                    {
-                        IDHinhAnh = c.Int(nullable: false, identity: true),
-                        IDTheLoaiAnh = c.Int(nullable: false),
-                        IDChung = c.Int(nullable: false),
-                        TenAnh = c.String(nullable: false),
-                    })
-                .PrimaryKey(t => t.IDHinhAnh);
-            
             CreateTable(
                 "dbo.HinhAnhTrams",
                 c => new
                     {
                         IDHinhAnh = c.Int(nullable: false, identity: true),
                         IDTram = c.Int(nullable: false),
-                        Ten = c.String(nullable: false),
+                        Ten = c.String(),
                     })
                 .PrimaryKey(t => t.IDHinhAnh);
             
@@ -56,7 +34,7 @@ namespace ServerBTS2.Migrations
                 c => new
                     {
                         IDMatDien = c.Int(nullable: false, identity: true),
-                        IDNhaTram = c.Int(nullable: false),
+                        IDTram = c.Int(nullable: false),
                         NgayMatDien = c.DateTime(nullable: false),
                         GioMatDien = c.Time(nullable: false, precision: 7),
                         ThoiGianMayNo = c.Time(nullable: false, precision: 7),
@@ -130,15 +108,6 @@ namespace ServerBTS2.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId)
                 .Index(t => t.RoleId);
-            
-            CreateTable(
-                "dbo.TheLoaiAnhs",
-                c => new
-                    {
-                        IDTheLoaiAnh = c.Int(nullable: false, identity: true),
-                        TenTheLoai = c.String(nullable: false),
-                    })
-                .PrimaryKey(t => t.IDTheLoaiAnh);
             
             CreateTable(
                 "dbo.Trams",
@@ -237,7 +206,6 @@ namespace ServerBTS2.Migrations
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.UserBTS");
             DropTable("dbo.Trams");
-            DropTable("dbo.TheLoaiAnhs");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.NhaTrams");
@@ -246,8 +214,6 @@ namespace ServerBTS2.Migrations
             DropTable("dbo.MatDiens");
             DropTable("dbo.LichSuQuanLies");
             DropTable("dbo.HinhAnhTrams");
-            DropTable("dbo.HinhAnhs");
-            DropTable("dbo.BaoCaos");
         }
     }
 }

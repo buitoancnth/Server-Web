@@ -32,6 +32,14 @@ namespace ServerBTS2.Controllers
         private const string LocalLoginProvider = "Local";
         private ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationUserManager _userManager;
+        private static Random random = new Random();
+
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
 
         public AccountController()
         {
@@ -488,6 +496,63 @@ namespace ServerBTS2.Controllers
                 throw;
             }
             return StatusCode(HttpStatusCode.NoContent);
+        }
+        // POST: api/Account/UpdateImage
+
+        [Route("PostImage")]
+        [ResponseType(typeof(UserBTS))]
+        public IHttpActionResult PostImage()
+        {
+
+            try
+            {
+
+                var httpRequest = HttpContext.Current.Request;
+
+                foreach (string file in httpRequest.Files)
+                {
+                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
+
+                    var postedFile = httpRequest.Files[file];
+                    var ex = RandomString(10);
+
+                    if (postedFile != null && postedFile.ContentLength > 0)
+                    {
+                        int MaxContentLength = 1024 * 1024 * 10; //Size = 10 MB  
+
+                        IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".gif", ".png" };
+                        var ext = postedFile.FileName.Substring(postedFile.FileName.LastIndexOf('.'));
+                        var extension = ext.ToLower();
+                        if (!AllowedFileExtensions.Contains(extension))
+                        {
+
+                            return StatusCode(HttpStatusCode.BadRequest);
+                        }
+                        else if (postedFile.ContentLength > MaxContentLength)
+                        {
+                            return StatusCode(HttpStatusCode.BadRequest);
+                        }
+                        else
+                        {
+                            var filePath = HttpContext.Current.Server.MapPath("~/image/" + ex + postedFile.FileName);
+                            postedFile.SaveAs(filePath);
+                        }
+                    }
+                    var id = User.Identity.GetUserId();
+                    UserBTS user = db.UserBTSs.Find(id);
+                    user.Image = ex + postedFile.FileName;
+                    db.SaveChanges();
+                    return Ok(user);
+                    //return CreatedAtRoute("PostImage", new { id = user.IDUser }, user);
+                }
+                return StatusCode(HttpStatusCode.NotFound);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(HttpStatusCode.NotFound);
+            }
+
+
         }
         //PUT: api/Account/ChangeRole
         [Authorize(Roles = "Admin")]
