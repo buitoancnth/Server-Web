@@ -9,7 +9,7 @@ namespace ServerBTS2.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(ServerBTS2.Models.ApplicationDbContext context)

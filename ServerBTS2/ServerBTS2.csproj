@@ -262,9 +262,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201805150306425_Initial.cs" />
-    <Compile Include="Migrations\201805150306425_Initial.Designer.cs">
-      <DependentUpon>201805150306425_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201805150821110_Initial.cs" />
+    <Compile Include="Migrations\201805150821110_Initial.Designer.cs">
+      <DependentUpon>201805150821110_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -321,6 +321,7 @@
     <Content Include="App_Data\BodyPart_133f01ca-b6d8-4ea3-9674-ce22b0cc545e" />
     <Content Include="App_Data\BodyPart_f7a3d5fb-5a82-4b9f-99af-a169aa03f419" />
     <Content Include="App_Data\BodyPart_fac1b735-5760-4994-9cc2-4b178ca2930c" />
+    <None Include="Properties\PublishProfiles\ServerBTS220180515045504 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -365,8 +366,8 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201805150306425_Initial.resx">
-      <DependentUpon>201805150306425_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805150821110_Initial.resx">
+      <DependentUpon>201805150821110_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

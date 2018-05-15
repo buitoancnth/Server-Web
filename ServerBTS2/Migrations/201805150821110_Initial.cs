@@ -37,9 +37,9 @@ namespace ServerBTS2.Migrations
                         IDTram = c.Int(nullable: false),
                         NgayMatDien = c.DateTime(nullable: false),
                         GioMatDien = c.Time(nullable: false, precision: 7),
-                        ThoiGianMayNo = c.Time(nullable: false, precision: 7),
-                        ThoiGianNgung = c.Time(nullable: false, precision: 7),
-                        TongThoiGianChay = c.Time(precision: 7),
+                        ThoiGianMayNo = c.DateTime(nullable: false),
+                        ThoiGianNgung = c.DateTime(nullable: false),
+                        TongThoiGianChay = c.String(),
                         QuangDuongDiChuyen = c.Double(nullable: false),
                         TienPhat = c.Double(),
                     })
@@ -85,17 +85,17 @@ namespace ServerBTS2.Migrations
                         ChungMayPhat = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.IDNhaTram);
-            
+
             CreateTable(
                 "dbo.AspNetRoles",
                 c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Name = c.String(nullable: false, maxLength: 256),
-                    })
+                {
+                    Id = c.String(nullable: false, maxLength: 128),
+                    Name = c.String(nullable: false, maxLength: 256),
+                })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
-            
+
             CreateTable(
                 "dbo.AspNetUserRoles",
                 c => new

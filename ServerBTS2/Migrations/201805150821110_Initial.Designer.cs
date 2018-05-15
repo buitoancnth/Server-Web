@@ -13,7 +13,7 @@ namespace ServerBTS2.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201805150306425_Initial"; }
+            get { return "201805150821110_Initial"; }
         }
         
         string IMigrationMetadata.Source
