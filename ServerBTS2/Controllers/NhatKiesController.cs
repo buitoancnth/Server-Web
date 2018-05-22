@@ -46,30 +46,36 @@ namespace ServerBTS2.Controllers
 
             return Ok(nhatKy);
         }
+        // GET: api/NhatKies/5
+        [ResponseType(typeof(NhatKy))]
+        [Route("api/NhatKyByIDTram")]
+        public IHttpActionResult GetNhatKyByIDTram(int id)
+        {
+            var tmpTram = db.Trams.SingleOrDefault(u => u.IDTram == id);
+            if (tmpTram == null)
+            {
+                return NotFound();
+            }
+            if (!isAccess(tmpTram.IDQuanLy))
+                return StatusCode(HttpStatusCode.Unauthorized);
+            var listNhatKy = db.NhatKies.Where(u => u.IDTram == id);
+            return Ok(listNhatKy);
+        }
 
         // PUT: api/NhatKies/5
         [ResponseType(typeof(void))]
         [Authorize(Roles = "QuanLy")]
-        public IHttpActionResult PutNhatKy(int id, NhatKy nhatKy)
+        public IHttpActionResult PutTinhTrang(int idNhatKy, Boolean daGiaiQuyet)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            if (id != nhatKy.IDNhatKy)
-            {
-                return BadRequest();
-            }
 
-            NhatKy nhatKyBefore = db.NhatKies.Find(id);
+            NhatKy nhatKyBefore = db.NhatKies.Find(idNhatKy);
             if (nhatKyBefore == null) return NotFound();
 
             var tmp = db.Trams.SingleOrDefault(u => u.IDTram == nhatKyBefore.IDTram);
             if (!isAccess(tmp.IDQuanLy))
                 return StatusCode(HttpStatusCode.Unauthorized);
 
-            nhatKyBefore.IDQuanLy = User.Identity.GetUserId();
-            nhatKyBefore.NoiDung = nhatKy.NoiDung;
+            nhatKyBefore.DaGiaiQuyet = daGiaiQuyet;
 
             try
             {
@@ -77,7 +83,7 @@ namespace ServerBTS2.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!NhatKyExists(id))
+                if (!NhatKyExists(idNhatKy))
                 {
                     return NotFound();
                 }

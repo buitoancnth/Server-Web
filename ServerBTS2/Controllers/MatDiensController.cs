@@ -108,7 +108,6 @@ namespace ServerBTS2.Controllers
                 matDien.TienPhat = TIENPHAT;
             db.MatDiens.Add(matDien);
             db.SaveChanges();
-
             return CreatedAtRoute("DefaultApi", new { id = matDien.IDMatDien }, matDien);
         }
 

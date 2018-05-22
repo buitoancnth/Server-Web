@@ -13,7 +13,6 @@ namespace ServerBTS2.Models
         public int IDNhaMang { get; set; }
         [Required(ErrorMessage = "TenNhaMang is required")]
         public string TenNhaMang { get; set; }
-        [RegularExpression(@"^.*\.(jpg|jpeg|gif|JPG|png|PNG)$", ErrorMessage = "Image is not valid")]
         public string Image { get; set; }
     }
 }

@@ -419,8 +419,6 @@ namespace ServerBTS2.Controllers
             return db.UserBTSs.Find(User.Identity.GetUserId());
         }
 
-
-
         //GET: api/Account/GetQuyen
         [AllowAnonymous]
         [Route("GetQuyen")]
